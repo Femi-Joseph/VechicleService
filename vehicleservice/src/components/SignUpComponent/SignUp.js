@@ -6,6 +6,7 @@ import {
   Button,
 } from '@mui/material';
 import React, { useState } from 'react';
+import Axios from 'axios';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Unstable_DateField as DateField } from '@mui/x-date-pickers/DateField';
@@ -13,10 +14,25 @@ import { DatePicker } from '@mui/x-date-pickers';
 
 const SignUp = () => {
   const [name, setName] = useState('');
+  const [pwd, setPassword] = useState('');
+  const [confirmpwd, setConfirmPassword] = useState('');
   const [dob, setDob] = useState(new Date());
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
   const [image, setImage] = useState('');
+
+  const signup = () => {
+    console.log('here in signup fn');
+    Axios.post('http://localhost:3001/signup', {
+      name: name,
+      dob: dob,
+      email: email,
+      address: address,
+      photo: image,
+      password: pwd,
+    }).then((response) => console.log(response));
+  };
+
   console.log(name, dob, email, address, image);
 
   return (
@@ -72,6 +88,24 @@ const SignUp = () => {
           />
           <TextField
             variant="outlined"
+            label="Password"
+            type="password"
+            sx={{ width: 350, marginTop: 2 }}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <TextField
+            variant="outlined"
+            label="Confirm Password"
+            type="password"
+            sx={{ width: 350, marginTop: 2 }}
+            onChange={(e) => {
+              setConfirmPassword(e.target.value);
+            }}
+          />
+          <TextField
+            variant="outlined"
             label="Address"
             multiline
             rows={5}
@@ -91,7 +125,7 @@ const SignUp = () => {
             }}
           ></TextField>
 
-          <Button>Sign Up</Button>
+          <Button onClick={() => signup()}>Sign Up</Button>
         </Box>
       </form>
     </div>

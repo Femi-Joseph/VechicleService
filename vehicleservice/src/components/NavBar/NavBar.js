@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   AppBar,
   Grid,
@@ -56,12 +57,14 @@ const NavBar = ({ links }) => {
             <Grid item xs={2} />
             <Grid item xs={3}>
               <Box display="flex">
-                <Button
-                  sx={{ marginLeft: 'auto', background: 'rgba(79,195,34,1)' }}
-                  variant="contained"
-                >
-                  Login
-                </Button>
+                <a href="/login">
+                  <Button
+                    sx={{ marginLeft: 'auto', background: 'rgba(79,195,34,1)' }}
+                    variant="contained"
+                  >
+                    Login
+                  </Button>
+                </a>
                 <a href="/signup">
                   <Button
                     sx={{ marginLeft: 1, background: 'rgba(79,195,34,1)' }}
