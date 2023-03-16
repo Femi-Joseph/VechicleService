@@ -7,6 +7,7 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 import Axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Unstable_DateField as DateField } from '@mui/x-date-pickers/DateField';
@@ -20,6 +21,7 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
   const [image, setImage] = useState('');
+  const navigate = useNavigate();
 
   const signup = () => {
     console.log('here in signup fn');
@@ -30,10 +32,13 @@ const SignUp = () => {
       address: address,
       photo: image,
       password: pwd,
-    }).then((response) => console.log(response));
+    }).then((response) => {
+      navigate('/login');
+    });
+    navigate('/login');
   };
 
-  console.log(name, dob, email, address, image);
+  //console.log(name, dob, email, address, image);
 
   return (
     <div>
